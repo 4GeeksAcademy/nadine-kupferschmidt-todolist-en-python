@@ -70,12 +70,17 @@ def load_todos():
         print("Todavía no hay un archivo todos.csv para cargar.")
         return
 
-    print(f"Se cargaron {len(todos)} tareas.")
+    if len(todos) == 1:
+        print("Se cargó 1 tarea.")
+    else:
+        print(f"Se cargaron {len(todos)} tareas.")
 
 
 # Ejecuta el menú solo cuando este archivo se inicia directamente.
 if __name__ == "__main__":
     salir = False
+    load_todos()
+    ultima_version_guardada = list(get_todos())
     while not salir:
         print("""
 ══════════════════════════════════
@@ -92,6 +97,12 @@ if __name__ == "__main__":
         respuesta = input("Elegí una opción (1-6): ").strip()
 
         if respuesta == "6" or respuesta.lower() == "salir":
+            if get_todos() != ultima_version_guardada:
+                guardar_antes_de_salir = input(
+                    "Tenés cambios sin guardar. ¿Querés guardar antes de salir? (s/n): "
+                ).strip().lower()
+                if guardar_antes_de_salir == "s":
+                    save_todos()
             print("¡Hasta luego!")
             salir = True
         elif respuesta == "1":
@@ -101,24 +112,34 @@ if __name__ == "__main__":
             if titulo.strip().lower() != "v":
                 add_one_task(titulo)
             print("---------------------")
+            input("Presioná Enter para volver al menú...")
         elif respuesta == "2":
             print("--- Eliminar tarea ---")
             print("(escribí 'v' para volver al menú)")
-            numero = input("¿Qué número de tarea querés eliminar? ")
-            if numero.strip().lower() != "v":
-                delete_task(numero)
+            print_list()
+            if len(get_todos()) > 0:
+                numero = input("¿Qué número de tarea querés eliminar? ")
+                if numero.strip().lower() != "v":
+                    delete_task(numero)
             print("---------------------")
+            input("Presioná Enter para volver al menú...")
         elif respuesta == "3":
             print("--- Tus tareas ---")
             print_list()
             print("---------------------")
+            input("Presioná Enter para volver al menú...")
         elif respuesta == "4":
             print("--- Guardar tareas ---")
             save_todos()
+            ultima_version_guardada = list(get_todos())
             print("---------------------")
+            input("Presioná Enter para volver al menú...")
         elif respuesta == "5":
             print("--- Cargar tareas ---")
             load_todos()
+            ultima_version_guardada = list(get_todos())
             print("---------------------")
+            input("Presioná Enter para volver al menú...")
         else:
             print("Opción inválida, probá de nuevo.")
+            input("Presioná Enter para volver al menú...")
