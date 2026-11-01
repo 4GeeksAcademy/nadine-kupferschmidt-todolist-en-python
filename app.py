@@ -115,9 +115,9 @@ if __name__ == "__main__":
             input("Presioná Enter para volver al menú...")
         elif respuesta == "2":
             print("--- Eliminar tarea ---")
-            print("(escribí 'v' para volver al menú)")
             print_list()
             if len(get_todos()) > 0:
+                print("(escribí 'v' para volver al menú)")
                 numero = input("¿Qué número de tarea querés eliminar? ")
                 if numero.strip().lower() != "v":
                     delete_task(numero)
@@ -136,8 +136,18 @@ if __name__ == "__main__":
             input("Presioná Enter para volver al menú...")
         elif respuesta == "5":
             print("--- Cargar tareas ---")
-            load_todos()
-            ultima_version_guardada = list(get_todos())
+            if get_todos() != ultima_version_guardada:
+                cargar_igual = input(
+                    "Tenés cambios sin guardar que se van a perder. ¿Querés cargar igual? (s/n): "
+                ).strip().lower()
+                if cargar_igual == "s":
+                    load_todos()
+                    ultima_version_guardada = list(get_todos())
+                else:
+                    print("Carga cancelada.")
+            else:
+                load_todos()
+                ultima_version_guardada = list(get_todos())
             print("---------------------")
             input("Presioná Enter para volver al menú...")
         else:
