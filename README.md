@@ -1,23 +1,42 @@
-# Python Hello
+# Gestor de Tareas (CLI en Python)
 
-The most basic boilerplate to start a Python project at 4Geeks is to start your very first Python project from scratch.
+## Descripción
 
-## What to do next?
+Herramienta de terminal para que un equipo de operaciones de logística gestione tareas pendientes.
 
-Open the `main.py` file and start writing your code.
+## Funcionalidades
 
-Execute your code by typing the following command on your terminal:
+- Agrega tareas con un título no vacío.
+- Muestra las tareas pendientes numeradas.
+- Elimina una tarea mediante el número que aparece en la lista.
+- Guarda las tareas en `todos.csv` y las carga desde ese archivo.
+- Al iniciar, intenta cargar las tareas guardadas. Al salir, ofrece guardar si hay cambios sin guardar.
+
+## Cómo usarlo
+
+Iniciá el programa desde la terminal con:
 
 ```bash
-$ python main.py
+python3 app.py
 ```
 
-You can create and include as many python files (a.k.a. modules) as you want using the import statements.
+Usá las opciones del menú para agregar, eliminar, ver, guardar o cargar tareas. Elegí la opción 6 o escribí `salir` para terminar. Al agregar o eliminar, podés escribir `v` para volver al menú.
 
-## Requirements
+## Cómo correr las pruebas
 
-Make sure you have Python installed in your computer. We strongly recommend [installing Python through Pyenv ](https://4geeks.com/how-to/what-is-pyenv-and-how-to-install-pyenv) to avoid version conflicts in the future.
+Ejecutá las pruebas desde la terminal con:
 
-### Contributors
+```bash
+python3 test.py
+```
 
-This template was built as part of the [4Geeks Python Resources](https://4geeks.com/technology/python) for learning at [4Geeks.com](https://4geeks.com) by [Alejandro Sanchez](https://twitter.com/alesanchezr) and [many other contributors](https://github.com/4GeeksAcademy/python-hello/graphs/contributors).
+## Estructura del proyecto
+
+- `app.py`: aplicación de gestión de tareas y menú de terminal.
+- `test.py`: pruebas automatizadas.
+- `.gitignore`: excluye archivos generados, incluido `todos.csv`.
+- `todos.csv`: archivo de tareas que se crea al guardar; no se sube al repositorio.
+
+## Tecnologías
+
+Python y solo módulos de la biblioteca estándar. La aplicación usa el módulo `csv` para guardar y cargar tareas.
